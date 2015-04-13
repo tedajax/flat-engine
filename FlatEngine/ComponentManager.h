@@ -20,11 +20,19 @@ public:
 
     T_COMPONENT* getComponentById(ComponentId id);
 
+    void processPendingUpdates();
+
+protected:
+    void processPendingAdds();
+    void processPendingRemoves();
+
 protected:
     std::vector<T_COMPONENT>                        m_instances;
     std::vector<T_COMPONENT>                        m_addedQueue;
     std::vector<T_COMPONENT*>                       m_deleteQueue;
     std::unordered_map<ComponentId, T_COMPONENT>    m_idToComponents;
+
+    ComponentCommonData<T_COMPONENT, ComponentManager<T_COMPONENT>> m_commonData;
 
     friend Component<T_COMPONENT, ComponentManager<T_COMPONENT>>;
 };
